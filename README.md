@@ -1,3 +1,3 @@
 # Cube
 
-Simple state management solution for Flutter. Inspired 
+A modified version of the reactive state manager from Getx to work with provider.

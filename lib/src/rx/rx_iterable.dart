@@ -4,97 +4,97 @@ abstract class RxIterable<E> extends _Rx<Iterable<E>> implements Iterable<E> {
   RxIterable([Iterable<E> iterable]) : super(iterable);
 
   @override
-  bool any(bool Function(E element) test) => _value.any(test);
+  bool any(bool Function(E element) test) => value.any(test);
 
   @override
-  Iterable<R> cast<R>() => _value.cast<R>();
+  Iterable<R> cast<R>() => value.cast<R>();
 
   @override
-  bool contains(Object element) => _value.contains(element);
+  bool contains(Object element) => value.contains(element);
 
   @override
-  E elementAt(int index) => _value.elementAt(index);
+  E elementAt(int index) => value.elementAt(index);
 
   @override
-  Iterable<T> expand<T>(Iterable<T> Function(E) f) => _value.expand(f);
+  Iterable<T> expand<T>(Iterable<T> Function(E) f) => value.expand(f);
 
   @override
-  E get first => _value.first;
+  E get first => value.first;
 
   @override
   E firstWhere(bool Function(E element) test, {E Function() orElse}) {
-    return _value.firstWhere(test, orElse: orElse);
+    return value.firstWhere(test, orElse: orElse);
   }
 
   @override
   T fold<T>(T initialValue, T Function(T previousValue, E element) combine) {
-    return _value.fold(initialValue, combine);
+    return value.fold(initialValue, combine);
   }
 
   @override
-  Iterable<E> followedBy(Iterable<E> other) => _value.followedBy(other);
+  Iterable<E> followedBy(Iterable<E> other) => value.followedBy(other);
 
   @override
-  bool get isEmpty => _value.isEmpty;
+  bool get isEmpty => value.isEmpty;
 
   @override
-  bool get isNotEmpty => _value.isNotEmpty;
+  bool get isNotEmpty => value.isNotEmpty;
 
   @override
-  Iterator<E> get iterator => _value.iterator;
+  Iterator<E> get iterator => value.iterator;
 
   @override
-  String join([String separator = ""]) => _value.join(separator);
+  String join([String separator = ""]) => value.join(separator);
 
   @override
-  E get last => _value.last;
+  E get last => value.last;
 
   @override
   E lastWhere(bool Function(E element) test, {E Function() orElse}) =>
-      _value.lastWhere(test, orElse: orElse);
+      value.lastWhere(test, orElse: orElse);
 
   @override
-  int get length => _value.length;
+  int get length => value.length;
 
   @override
-  Iterable<T> map<T>(T Function(E e) f) => _value.map(f);
+  Iterable<T> map<T>(T Function(E e) f) => value.map(f);
 
   @override
-  E reduce(E Function(E value, E element) combine) => _value.reduce(combine);
+  E reduce(E Function(E value, E element) combine) => value.reduce(combine);
 
   @override
-  E get single => _value.single;
+  E get single => value.single;
 
   @override
   E singleWhere(bool Function(E element) test, {E Function() orElse}) =>
-      _value.singleWhere(test, orElse: orElse);
+      value.singleWhere(test, orElse: orElse);
 
   @override
-  Iterable<E> skip(int count) => _value.skip(count);
+  Iterable<E> skip(int count) => value.skip(count);
 
   @override
-  Iterable<E> skipWhile(bool Function(E value) test) => _value.skipWhile(test);
+  Iterable<E> skipWhile(bool Function(E value) test) => value.skipWhile(test);
 
   @override
-  Iterable<E> take(int count) => _value.take(count);
+  Iterable<E> take(int count) => value.take(count);
 
   @override
-  Iterable<E> takeWhile(bool Function(E value) test) => _value.takeWhile(test);
+  Iterable<E> takeWhile(bool Function(E value) test) => value.takeWhile(test);
 
   @override
-  List<E> toList({bool growable = true}) => _value.toList(growable: true);
+  List<E> toList({bool growable = true}) => value.toList(growable: true);
 
   @override
-  Set<E> toSet() => _value.toSet();
+  Set<E> toSet() => value.toSet();
 
   @override
-  Iterable<E> where(bool Function(E element) test) => _value.where(test);
+  Iterable<E> where(bool Function(E element) test) => value.where(test);
 
   @override
-  Iterable<T> whereType<T>() => _value.whereType<T>();
+  Iterable<T> whereType<T>() => value.whereType<T>();
 
   @override
-  bool every(bool Function(E element) test) => _value.every(test);
+  bool every(bool Function(E element) test) => value.every(test);
 
   @override
   void forEach(void Function(E element) f) => _value.forEach(f);
