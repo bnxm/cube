@@ -20,15 +20,13 @@ abstract class _Rx<T> implements RxInterface<T> {
   final Map<Stream<T>, StreamSubscription> _subscriptions = {};
 
   void _emit() => subject.add(value);
+  void _attachListener() => rxGlobal?.addListener(subject.stream);
 
   bool _firstRebuild = true;
 
   T _value;
   T get value {
-    if (rxGlobal != null) {
-      rxGlobal.addListener(subject.stream);
-    }
-
+    _attachListener();
     return _value;
   }
 

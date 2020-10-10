@@ -5,7 +5,7 @@ extension CubeListExtension<E> on List<E> {
 }
 
 class RxList<E> extends RxIterable<E> implements List<E> {
-  RxList([List<E> initial]) : super(initial);
+  RxList([List<E> initial]) : super(initial ?? []);
 
   @override
   List<E> get value => super.value as List<E>;
