@@ -9,11 +9,11 @@ import 'rx/rx_interface.dart';
 
 typedef CubeBuilder<T> = Widget Function(BuildContext _, T cube);
 
-class Cubx<T extends Cube> extends StatefulWidget {
-  final T cube;
+class Cubx<T extends Cube?> extends StatefulWidget {
+  final T? cube;
   final CubeBuilder<T> builder;
   const Cubx({
-    @required this.builder,
+    required this.builder,
     this.cube,
   }) : assert(builder != null);
 
@@ -21,10 +21,10 @@ class Cubx<T extends Cube> extends StatefulWidget {
   _CubxState<T> createState() => _CubxState<T>();
 }
 
-class _CubxState<C extends Cube> extends State<Cubx<C>> {
-  RxInterface _rx;
-  StreamSubscription _subscription;
-  C _cube;
+class _CubxState<C extends Cube?> extends State<Cubx<C?>> {
+  RxInterface? _rx;
+  late StreamSubscription _subscription;
+  C? _cube;
 
   bool get _creator => widget.cube != null;
 
@@ -39,7 +39,7 @@ class _CubxState<C extends Cube> extends State<Cubx<C>> {
       _cube?.onInit();
     }
 
-    _subscription = _rx.subject.stream.listen(
+    _subscription = _rx!.subject.stream.listen(
       (_) => setState(() {}),
     );
   }
@@ -60,20 +60,20 @@ class _CubxState<C extends Cube> extends State<Cubx<C>> {
     }
 
     _subscription.cancel();
-    _rx.close();
+    _rx!.close();
     super.dispose();
   }
 }
 
 class Cubx2<A extends Cube, B extends Cube> extends StatelessWidget {
-  final A first;
-  final B second;
+  final A? first;
+  final B? second;
   final Widget Function(BuildContext _, A first, B second) builder;
   const Cubx2({
-    Key key,
+    Key? key,
     this.first,
     this.second,
-    @required this.builder,
+    required this.builder,
   }) : super(key: key);
 
   @override

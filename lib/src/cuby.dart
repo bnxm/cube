@@ -9,7 +9,7 @@ class Cuby extends StatefulWidget {
   final Widget Function() builder;
   const Cuby(
     this.builder, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class Cuby extends StatefulWidget {
 class _CubyState extends State<Cuby> {
   final RxInterface _observer = Rx();
 
-  StreamSubscription _subscription;
+  late StreamSubscription _subscription;
 
   @override
   void initState() {

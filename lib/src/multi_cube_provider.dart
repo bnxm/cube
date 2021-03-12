@@ -51,9 +51,9 @@ import 'cube_provider.dart';
 class MultiCubeProvider extends MultiProvider {
   /// {@macro multicubeprovider}
   MultiCubeProvider({
-    Key key,
-    @required List<CubeProviderSingleChildWidget> providers,
-    @required Widget child,
+    Key? key,
+    required List<CubeProviderSingleChildWidget> providers,
+    required Widget child,
   })  : assert(providers != null),
         assert(child != null),
         super(key: key, providers: providers, child: child);

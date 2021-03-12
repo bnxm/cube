@@ -34,14 +34,14 @@ mixin CubeProviderSingleChildWidget on SingleChildWidget {}
 class CubeProvider<T extends Cube> extends SingleChildStatelessWidget with CubeProviderSingleChildWidget {
   /// {@macro cubitprovider}
   CubeProvider({
-    Key key,
-    @required CreateCube<T> create,
-    Widget child,
-    bool lazy,
+    Key? key,
+    required CreateCube<T> create,
+    Widget? child,
+    bool? lazy,
   }) : this._(
           key: key,
           create: (context) => create(context)..onCreate(),
-          dispose: (_, cubit) => cubit?.dispose(),
+          dispose: (_, cubit) => cubit.dispose(),
           child: child,
           lazy: lazy,
         );
@@ -64,9 +64,9 @@ class CubeProvider<T extends Cube> extends SingleChildStatelessWidget with CubeP
   /// );
   /// ```
   CubeProvider.value({
-    Key key,
-    @required T value,
-    Widget child,
+    Key? key,
+    required T value,
+    Widget? child,
   }) : this._(
           key: key,
           create: (_) => value,
@@ -76,9 +76,9 @@ class CubeProvider<T extends Cube> extends SingleChildStatelessWidget with CubeP
   /// Internal constructor responsible for creating the [CubeProvider].
   /// Used by the [CubeProvider] default and value constructors.
   CubeProvider._({
-    Key key,
-    @required Create<T> create,
-    Dispose<T> dispose,
+    Key? key,
+    required Create<T> create,
+    Dispose<T>? dispose,
     this.child,
     this.lazy,
   })  : _create = create,
@@ -86,13 +86,13 @@ class CubeProvider<T extends Cube> extends SingleChildStatelessWidget with CubeP
         super(key: key, child: child);
 
   /// [child] and its descendants which will have access to the `cubit`.
-  final Widget child;
+  final Widget? child;
 
   /// Whether or not the `cubit` being provided should be lazily created.
   /// Defaults to `true`.
-  final bool lazy;
+  final bool? lazy;
 
-  final Dispose<T> _dispose;
+  final Dispose<T>? _dispose;
 
   final Create<T> _create;
 
@@ -105,7 +105,7 @@ class CubeProvider<T extends Cube> extends SingleChildStatelessWidget with CubeP
   /// ```dart
   /// CubitProvider.of<CubitA>(context)
   /// ```
-  static T of<T extends Cube>(BuildContext context) {
+  static T of<T extends Cube?>(BuildContext context) {
     try {
       return Provider.of<T>(context, listen: false);
     } on ProviderNotFoundException catch (e) {
@@ -124,7 +124,7 @@ The context used was: $context
   }
 
   @override
-  Widget buildWithChild(BuildContext context, Widget child) {
+  Widget buildWithChild(BuildContext context, Widget? child) {
     return InheritedProvider<T>(
       lazy: lazy,
       create: _create,
@@ -143,5 +143,5 @@ extension CubeProviderExtension on BuildContext {
   /// ```dart
   /// CubeProvider.of<C>(context)
   /// ```
-  C cube<C extends Cube>() => CubeProvider.of<C>(this);
+  C cube<C extends Cube?>() => CubeProvider.of<C>(this);
 }

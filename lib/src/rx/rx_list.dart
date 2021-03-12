@@ -5,13 +5,13 @@ extension CubeListExtension<E> on List<E> {
 }
 
 class RxList<E> extends RxIterable<E> implements List<E> {
-  RxList([List<E> initial]) : super(initial ?? []);
+  RxList([List<E>? initial]) : super(initial ?? []);
 
   @override
   List<E> get value => super.value as List<E>;
 
   @override
-  set value(Iterable<E> value) => super.value = value.toList();
+  set value(Iterable<E>? value) => super.value = value!.toList();
 
   @override
   E operator [](int index) => value[index];
@@ -56,7 +56,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 
   @override
-  bool remove(Object item) {
+  bool remove(Object? item) {
     final hasRemoved = value.remove(item);
     if (hasRemoved) _emit();
     return hasRemoved;
@@ -95,19 +95,19 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 
   @override
-  void sort([Comparator<E> compare]) {
+  void sort([Comparator<E>? compare]) {
     value.sort();
     _emit();
   }
 
   @override
-  List<R> cast<R>() => _value.cast<R>();
+  List<R> cast<R>() => _value!.cast<R>() as List<R>;
 
   @override
   Map<int, E> asMap() => value.asMap();
 
   @override
-  void fillRange(int start, int end, [E fillValue]) {
+  void fillRange(int start, int end, [E? fillValue]) {
     value.fillRange(start, end, fillValue);
     _emit();
   }
@@ -129,10 +129,10 @@ class RxList<E> extends RxIterable<E> implements List<E> {
       value.indexWhere(test, start);
 
   @override
-  int lastIndexOf(E element, [int start]) => value.lastIndexOf(element, start);
+  int lastIndexOf(E element, [int? start]) => value.lastIndexOf(element, start);
 
   @override
-  int lastIndexWhere(bool Function(E element) test, [int start]) =>
+  int lastIndexWhere(bool Function(E element) test, [int? start]) =>
       value.lastIndexWhere(test, start);
 
   @override
@@ -166,11 +166,11 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 
   @override
-  void shuffle([Random random]) {
+  void shuffle([Random? random]) {
     value.shuffle(random);
     _emit();
   }
 
   @override
-  List<E> sublist(int start, [int end]) => value.sublist(start, end);
+  List<E> sublist(int start, [int? end]) => value.sublist(start, end);
 }

@@ -5,13 +5,13 @@ extension CubeSetExtension<E> on Set<E> {
 }
 
 class RxSet<E> extends RxIterable<E> implements Set<E> {
-  RxSet([Set<E> initial]) : super(initial);
+  RxSet([Set<E>? initial]) : super(initial);
 
   @override
   Set<E> get value => super.value as Set<E>;
 
   @override
-  set value(Iterable<E> value) => super.value = value.toSet();
+  set value(Iterable<E>? value) => super.value = value!.toSet();
 
   @override
   bool add(E item) {
@@ -27,7 +27,7 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   }
 
   @override
-  bool remove(Object item) {
+  bool remove(Object? item) {
     final hasRemoved = value.remove(item);
     if (hasRemoved) _emit();
     return hasRemoved;
@@ -46,7 +46,7 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   }
 
   @override
-  Set<R> cast<R>() => _value.cast<R>();
+  Set<R> cast<R>() => _value!.cast<R>() as Set<R>;
 
   @override
   void retainWhere(bool Function(E element) test) {
@@ -55,29 +55,29 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   }
 
   @override
-  void removeAll(Iterable<Object> elements) {
+  void removeAll(Iterable<Object?> elements) {
     value.removeAll(elements);
     _emit();
   }
 
   @override
-  void retainAll(Iterable<Object> elements) {
+  void retainAll(Iterable<Object?> elements) {
     value.retainAll(elements);
     _emit();
   }
 
   @override
-  bool containsAll(Iterable<Object> other) => value.containsAll(other);
+  bool containsAll(Iterable<Object?> other) => value.containsAll(other);
 
   @override
-  Set<E> difference(Set<Object> other) => value.difference(other);
+  Set<E> difference(Set<Object?> other) => value.difference(other);
 
   @override
-  Set<E> intersection(Set<Object> other) => value.intersection(other);
+  Set<E> intersection(Set<Object?> other) => value.intersection(other);
 
   @override
   Set<E> union(Set<E> other) => value.union(other);
 
   @override
-  E lookup(Object object) => value.lookup(object);
+  E? lookup(Object? object) => value.lookup(object);
 }

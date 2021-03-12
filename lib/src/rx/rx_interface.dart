@@ -1,6 +1,6 @@
 import 'dart:async';
 
-RxInterface<dynamic> rxGlobal;
+RxInterface<dynamic>? rxGlobal;
 
 abstract class RxInterface<T> {
   StreamController<T> get subject;
@@ -9,7 +9,7 @@ abstract class RxInterface<T> {
   void addListener(Stream<T> rxGetx);
 
   /// Closes the [Stream]
-  void close() => subject?.close();
+  void close() => subject.close();
 
   /// Calls [callback] with current value, when the value changed.
   StreamSubscription<T> listen(void Function(T value) onData);
