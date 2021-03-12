@@ -1,7 +1,7 @@
 part of 'rx_impl.dart';
 
 extension CubeSetExtension<E> on Set<E> {
-  RxSet<E> get rx => RxSet<E>(this);
+  RxSet<E> get rx => RxSet<E>() << this;
 }
 
 class RxSet<E> extends RxIterable<E> implements Set<E> {
@@ -80,4 +80,10 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
 
   @override
   E? lookup(Object? object) => value.lookup(object);
+
+  @override
+  RxSet<E> operator <<(Iterable<E> value) {
+    this.value = value;
+    return this;
+  }
 }

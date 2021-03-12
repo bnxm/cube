@@ -12,12 +12,12 @@ part 'rx_list.dart';
 part 'rx_map.dart';
 part 'rx_set.dart';
 
-abstract class _Rx<T> implements RxInterface<T?> {
+abstract class _Rx<T> implements RxInterface<T> {
   _Rx([T? initial]) : _value = initial;
 
   @override
-  final StreamController<T?> subject = StreamController.broadcast();
-  final Map<Stream<T?>, StreamSubscription> _subscriptions = {};
+  final StreamController<T> subject = StreamController.broadcast();
+  final Map<Stream<T>, StreamSubscription> _subscriptions = {};
 
   void _emit() => subject.add(value);
   void _attachListener() => rxGlobal?.addListener(subject.stream);
@@ -25,12 +25,12 @@ abstract class _Rx<T> implements RxInterface<T?> {
   bool _firstRebuild = true;
 
   T? _value;
-  T? get value {
+  T get value {
     _attachListener();
-    return _value;
+    return _value as T;
   }
 
-  set value(T? value) {
+  set value(T value) {
     if (_value == value && !_firstRebuild) return;
     _firstRebuild = false;
     _value = value;
@@ -48,17 +48,17 @@ abstract class _Rx<T> implements RxInterface<T?> {
   bool get hasValue => _value != null;
 
   @override
-  void addListener(Stream<T?> rx) {
+  void addListener(Stream<T> rx) {
     if (_subscriptions.containsKey(rx)) return;
 
     _subscriptions[rx] = rx.listen(subject.add);
   }
 
-  Stream<T?> get stream => subject.stream;
+  Stream<T> get stream => subject.stream;
 
   @override
-  StreamSubscription<T?> listen(
-    void Function(T?) onData, {
+  StreamSubscription<T> listen(
+    void Function(T) onData, {
     Function? onError,
     void Function()? onDone,
     bool? cancelOnError,
@@ -86,8 +86,14 @@ class Rx<T> extends _Rx<T> {
   Rx([T? initial]) : super(initial);
 
   Stream<R> map<R>(R Function(T? data) mapper) => stream.map(mapper);
+
+  @override
+  Rx<T> operator <<(T value) {
+    this.value = value;
+    return this;
+  }
 }
 
 extension CubeExtensions<T> on T {
-  Rx<T> get rx => Rx<T>(this);
+  Rx<T> get rx => Rx<T>() << this;
 }

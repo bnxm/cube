@@ -1,11 +1,11 @@
 part of 'rx_impl.dart';
 
 extension CubeListExtension<E> on List<E> {
-  RxList<E> get rx => RxList<E>(this);
+  RxList<E> get rx => RxList<E>() << this;
 }
 
 class RxList<E> extends RxIterable<E> implements List<E> {
-  RxList([List<E>? initial]) : super(initial ?? []);
+  RxList([List<E>? initial]) : super(initial);
 
   @override
   List<E> get value => super.value as List<E>;
@@ -101,7 +101,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 
   @override
-  List<R> cast<R>() => _value!.cast<R>() as List<R>;
+  List<R> cast<R>() => value.cast<R>();
 
   @override
   Map<int, E> asMap() => value.asMap();
@@ -173,4 +173,10 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   List<E> sublist(int start, [int? end]) => value.sublist(start, end);
+
+  @override
+  RxList<E> operator <<(Iterable<E> value) {
+    this.value = value;
+    return this;
+  }
 }

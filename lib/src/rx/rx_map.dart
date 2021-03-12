@@ -1,14 +1,14 @@
 part of 'rx_impl.dart';
 
 extension CubeMapExtension<K, V> on Map<K, V> {
-  RxMap<K, V> get rx => RxMap<K, V>(this);
+  RxMap<K, V> get rx => RxMap<K, V>() << this;
 }
 
 class RxMap<K, V> extends _Rx<Map<K, V>> implements Map<K, V> {
-  RxMap([Map<K, V>? initial]) : super(initial ?? {});
+  RxMap([Map<K, V>? initial]) : super(initial);
 
   @override
-  V? operator [](dynamic key) => value![key];
+  V? operator [](dynamic key) => value[key];
 
   @override
   void operator []=(K key, V value) {
@@ -77,35 +77,41 @@ class RxMap<K, V> extends _Rx<Map<K, V>> implements Map<K, V> {
   }
 
   @override
-  bool containsValue(Object? value) => this.value!.containsValue(value);
+  bool containsValue(Object? value) => this.value.containsValue(value);
 
   @override
-  Iterable<MapEntry<K, V>> get entries => value!.entries;
+  Iterable<MapEntry<K, V>> get entries => value.entries;
 
   @override
-  bool get isEmpty => value!.isEmpty;
+  bool get isEmpty => value.isEmpty;
 
   @override
-  bool get isNotEmpty => value!.isNotEmpty;
+  bool get isNotEmpty => value.isNotEmpty;
 
   @override
-  Iterable<K> get keys => value!.keys;
+  Iterable<K> get keys => value.keys;
 
   @override
-  int get length => value!.length;
+  int get length => value.length;
 
   @override
-  Iterable<V> get values => value!.values;
+  Iterable<V> get values => value.values;
 
   @override
-  void forEach(void Function(K key, V value) f) => value!.forEach(f);
+  void forEach(void Function(K key, V value) f) => value.forEach(f);
 
   @override
-  Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> Function(K key, V value) m) => value!.map(m);
+  Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> Function(K key, V value) m) => value.map(m);
 
   @override
   bool operator ==(dynamic o) => const DeepCollectionEquality().equals(value, o);
 
   @override
   int get hashCode => super.hashCode;
+
+  @override
+  RxMap<K, V> operator <<(Map<K, V> value) {
+    this.value = value;
+    return this;
+  }
 }

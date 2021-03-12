@@ -15,7 +15,7 @@ class Cubx<T extends Cube?> extends StatefulWidget {
   const Cubx({
     required this.builder,
     this.cube,
-  }) : assert(builder != null);
+  });
 
   @override
   _CubxState<T> createState() => _CubxState<T>();
